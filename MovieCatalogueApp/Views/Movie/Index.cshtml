@@ -23,96 +23,67 @@
 }
 @if (!User.IsInRole("Admin"))
 {
-    <h2>Stream a List of our Top Movies</h2>
+    <h1 class="display-4">Stream a List Of Our Top Movies</h1>
 }
-            else
-            {
-                <h2>Available Movies</h2>
-            }
-
-
-
+else
+{
+    <h1 class="display-4">Available Movies</h1>
+}
 
 <section class="Search-bar">
     <form>
-        <input type="text" placeholder="search here">
+        <input type="text" placeholder="Example: Avengers EndGame" class="form-control">
         <button type="submit"><i class="fa fa-search"></i></button>
     </form>
 </section>
+
 @if (User.IsInRole("Admin"))
 {
     <p>
-        <a asp-action="New">Create New</a>
+        <a asp-action="New" class="btn btn-primary">Create New</a>
     </p>
 }
 
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.ImageUrl)
+<section class="movies">
 
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Title)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Genre)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Rating)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Review)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.ReleaseDate)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.ImdbUrl)
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
+
+    <div class="row row-cols-1 row-cols-md-3 g-4">
         @foreach (var item in @Model)
         {
-            <tr>
-                <td>
-                    @if (item.ImageUrl != null)
-                    {
-                        <img src="@item.ImageUrl" alt="Image" />
-                    }
-                </td>
-                <td>
-                    @item.Title
-                </td>
-                <td>
-                    @item.Genre
-                </td>
-                <td>
-                    @item.Rating
-                </td>
-                <td>
-                    @item.Review
-                </td>
-                <td>
-                    @item.ReleaseDate
-                </td>
-                <td>
-                    @*Html.DisplayFor(modelItem => item.ImdbUrl)*@
-                    <a href=@item.ImdbUrl target="_blank">@item.Title</a>
-                </td>
-                @if (User.IsInRole("Admin"))
-                {
-                    <td>
-                        <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
-                        <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
-                        <a asp-action="DeleteConfirm" asp-route-id="@item.Id">Delete</a>
-                    </td>
-                }
+            <div class="col">
+                <div class="card">
 
-            </tr>
+                    <img src="@item.ImageUrl" class="img-fluid" alt="Image" width="200" height="200" />
+
+
+                    <div class="card-body">
+                        <h5 class="card-title">@item.Title</h5>
+                        <h5 class="card-text">@item.Genre</h5>
+                        <h5 class="card-text">@item.Rating</h5>
+                        <h5 class="card-text">@item.Review</h5>
+                        <h5 class="card-text">@item.ReleaseDate</h5>
+
+                        <a href="@item.ImdbUrl" class="btn btn-primary">Visit Site</a>
+
+                    </div>
+                    @if (User.IsInRole("Admin"))
+                     {
+                        <div class="card-footer">
+                            <a asp-action="Edit" asp-route-id="@item.Id" class="btn btn-dark">Edit</a> 
+                            <a asp-action="Details" asp-route-id="@item.Id" class="btn btn-dark"> Details </a> 
+                            <a asp-action="DeleteConfirm" asp-route-id="@item.Id" class="btn btn-danger"> Delete </a>
+
+                        </div>
+
+                     }
+
+                </div>
+            </div>
         }
-    </tbody>
-</table>
+
+    </div>
+
+</section>
+
+
+

@@ -19,24 +19,6 @@ namespace MovieCatalogueApp.Controllers
         {
             this.authService = authService;
         }
-        // GET: /<controller>/
-        //public async Task<IActionResult> Register()
-        //{
-        //    var model = new RegistrationModel
-        //    {
-        //        Name = "Lynn",
-        //        Email = "admin@gmail.com",
-        //        UserName = "LynnBaby",
-        //        Password = "LynnBaby@1",
-        //        PasswordConfirm = "LynnBaby@1",
-        //        Role = "Admin",
-
-      
-
-        //    };
-        //    var result = await authService.RegisterAsync(model);
-        //    return Ok(result.Message);
-        //}
 
         public async Task<IActionResult> Login()
         {
