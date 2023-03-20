@@ -1,0 +1,118 @@
+﻿@model IEnumerable<MovieCatalogue.BLL.Models.MovieVM>
+
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+@if (@TempData["SuccessMsg"] != null)
+{
+    <div class="alert alert-success alert-dismissible fade show" role="alert">
+        <strong>Success!</strong> @TempData["SuccessMsg"]
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+}
+
+
+@if (@TempData["ErrMsg"] != null)
+{
+    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+        <strong>Error!</strong> @TempData["ErrMsg"]
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+}
+@if (!User.IsInRole("Admin"))
+{
+    <h2>Stream a List of our Top Movies</h2>
+}
+            else
+            {
+                <h2>Available Movies</h2>
+            }
+
+
+
+
+<section class="Search-bar">
+    <form>
+        <input type="text" placeholder="search here">
+        <button type="submit"><i class="fa fa-search"></i></button>
+    </form>
+</section>
+@if (User.IsInRole("Admin"))
+{
+    <p>
+        <a asp-action="New">Create New</a>
+    </p>
+}
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.ImageUrl)
+
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Title)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Genre)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Rating)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Review)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ReleaseDate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ImdbUrl)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in @Model)
+        {
+            <tr>
+                <td>
+                    @if (item.ImageUrl != null)
+                    {
+                        <img src="@item.ImageUrl" alt="Image" />
+                    }
+                </td>
+                <td>
+                    @item.Title
+                </td>
+                <td>
+                    @item.Genre
+                </td>
+                <td>
+                    @item.Rating
+                </td>
+                <td>
+                    @item.Review
+                </td>
+                <td>
+                    @item.ReleaseDate
+                </td>
+                <td>
+                    @*Html.DisplayFor(modelItem => item.ImdbUrl)*@
+                    <a href=@item.ImdbUrl target="_blank">@item.Title</a>
+                </td>
+                @if (User.IsInRole("Admin"))
+                {
+                    <td>
+                        <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
+                        <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
+                        <a asp-action="DeleteConfirm" asp-route-id="@item.Id">Delete</a>
+                    </td>
+                }
+
+            </tr>
+        }
+    </tbody>
+</table>

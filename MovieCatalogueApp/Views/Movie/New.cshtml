@@ -1,0 +1,89 @@
+﻿@{
+    ViewBag.Title = "title";
+    Layout = "_Layout";
+}
+@using MovieCatalogue.DAL.Enums;
+@model MovieCatalogue.BLL.Models.AddorUpdateMovieVM;
+
+<h2>Create a Movie</h2>
+
+
+<form class="col-7" asp-controller="Movie" asp-action="Save">
+
+    @if (@ViewBag.ErrMsg != null)
+    {
+        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+            <strong>Error!</strong> @ViewBag.ErrMsg
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+    }
+
+
+    <div class="alert-danger" asp-validation-summary="@ValidationSummary.All"></div>
+
+
+    <div class="mb-3">
+        <label asp-for="@Model.Title" class="form-label"></label>
+        <input class="form-control" asp-for="@Model.Title">
+        <span asp-validation-for="Title"></span>
+    </div>
+
+
+    <div class="mb-3">
+
+        <label asp-for="@Model.Genre" class="form-label"></label>
+        <select class="form-select" aria-label="Default select example" asp-for="@Model.Genre" asp-items="Html.GetEnumSelectList <Genre>()">
+            <option selected="" value="">Pick a Genre</option>
+
+        </select>
+    </div>
+
+
+    <div class="mb-3">
+
+        <label asp-for="@Model.Review" class="form-label"></label>
+        <select class="form-select" aria-label="Default select example" asp-for="@Model.Review" asp-items="Html.GetEnumSelectList <Review>()">
+            <option selected="" value="">Pick a Review</option>
+
+        </select>
+    </div>
+
+
+    <div class="mb-3">
+
+        <label asp-for="@Model.Rating" class="form-label"></label>
+        <select class="form-select" aria-label="Default select example" asp-for="@Model.Rating" asp-items="Html.GetEnumSelectList <Rating>()">
+            <option selected="" value="">Pick a Rating</option>
+
+        </select>
+    </div>
+
+
+
+
+    <div class="mb-3">
+        <label asp-for="@Model.ReleaseDate" class="form-label"></label>
+        <input class="form-control" asp-for="@Model.ReleaseDate">
+    </div>
+
+    <div class="form-group">
+        <label asp-for="@Model.ImdbUrl" class="control-label"></label>
+        <input asp-for="@Model.ImdbUrl" class="form-control" />
+        <span asp-validation-for="ImdbUrl" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="@Model.ImageUrl" class="control-label"></label>
+        <input asp-for="@Model.ImageUrl" class="form-control" />
+        <span asp-validation-for="ImageUrl" class="text-danger"></span>
+    </div>
+
+    <button type="submit" class="btn btn-primary">Submit</button>
+</form>
+
+@section Scripts
+{
+    @{
+        Html.RenderPartial("_ValidationScriptsPartial");
+    }
+    ;
+}
