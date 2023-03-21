@@ -7,8 +7,10 @@ To use this application effectively some interesting steps are required:
 Firstly👌👌:  
 
 * You"ll need to edit the Connection string located in the appsettings.json file to fit your server name 
-* for mac users, the user id and password of your server is required "ConnectionString": {"DefaultConn": "Data Source=localhost,1433;Initial Catalog=MovieDB;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False"
-}
+* for mac users, the user id and password of your server is required 
+
+ `"ConnectionString": {"DefaultConn": "Data Source=localhost,1433;Initial Catalog=MovieDB;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False"
+}`
 
 After you've created your database successfully, you can access some of our features
 
