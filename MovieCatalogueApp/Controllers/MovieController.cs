@@ -100,10 +100,11 @@ namespace MovieCatalogueApp.Controllers
             return RedirectToAction("Index");
         }
 
-
-        public IActionResult Edit()
+        [HttpGet]
+        public async Task<IActionResult> Edit(int Id)
         {
-            return View(new AddorUpdateMovieVM());
+            var movie = await (_movieService.GetMovie(Id));
+            return View(movie);
         }
 
 
